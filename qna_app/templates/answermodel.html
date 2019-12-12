@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    this is the answer page <br>
+
+    <form method="POST" enctype="multiport/form-data">
+        {% csrf_token %}
+        Name: <input type="text" name="answer_by">
+        Comment: <input type="text" name="answer_desc">
+        Image: <input type="file" name="answer_img">
+        <input type="submit" value="submitt">
+
+
+    </form>
+    
+</body>
+</html>

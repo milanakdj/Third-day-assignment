@@ -7,8 +7,22 @@
     <title>Document</title>
 </head>
 <body>
-    {%for i in question%}
-        {{i}}
-    {%endfor%}
+    {% for i in question %}
+        {{i.title}} <br>
+        {{i.category}} <br>
+        {{ i.question_desc|truncatechars:20}}
+        <br> <img src='../../media/{{i.question_img}}' alt='image here' style='width:190px; height:190px'> <br>
+
+        the total vote so far are :{{i.question_votes}}<br>
+        <a href="{% url 'qna:vote' i.id %}"><button>vote</button></a><br>
+        <a href="{% url 'qna:update' i.id %}"><button>UPDATE</button></a><br>
+        <a href="{% url 'qna:delete' i.id %}"><button>DELETE</button></a><br>
+        <a href="{% url 'qna:ans' i.id %}"><textarea>Answer</textarea></a><br>
+
+
+
+    {% endfor %}
+
+    <a href="{% url 'qna:add' %}"><button>ADD</button></a>
 </body>
 </html>
