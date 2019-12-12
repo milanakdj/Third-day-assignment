@@ -15,3 +15,8 @@ def popular(request):
     Answer = AnswerModel.objects.all()
 
     return render(request,'popular.html',{'category':Category,'question':Question,'answer':Answer})
+
+
+def question(request):
+    Question=QuestionModel.objects.all()
+    return render(request,'questionmodel_list.html',{'question':Question})

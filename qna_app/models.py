@@ -5,6 +5,8 @@ from django.db import models
 class CategoryModel(models.Model):
     title=models.CharField(max_length=255)
     category_desc = models.CharField(max_length=120)
+    def __str__(self):
+        return(self.title)
 
 
 class QuestionModel(models.Model):
@@ -14,7 +16,7 @@ class QuestionModel(models.Model):
     question_desc = models.TextField()
     question_votes=models.IntegerField(default=0)
     question_img=models.ImageField(upload_to='QuestionImg',blank=True,null=True)
-    category = models.ForeignKey(CategoryModel,on_delete=models.CASCADE,blank=True,null=True)
+    category = models.ForeignKey(CategoryModel,on_delete=models.CASCADE)
     def __str__(self):
         return(self.title)
 
