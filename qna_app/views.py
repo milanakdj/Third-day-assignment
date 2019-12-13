@@ -15,6 +15,24 @@ def popular(request):
     return render(request,'popular.html',{'category':Category,'question':Question,'answer':Answer})
 
 
+def detail(request, id):
+    question = QuestionModel.objects.filter(id=id).first()
+
+    if request.method=="POST":
+        #THIS MEANS THE USER SUBMITTED THE ANSWER   
+        
+        answer = AnswerModel(answer_desc=request.POST['answer'], question=question)
+        answer.save(force_insert=True) #this makes so that the attributes that are needed but not sent still gets those to store the default
+
+
+    answers = AnswerModel.objects.filter(question=id)
+    d={
+        'question':question,
+        'answers':answers
+    }
+    return render(request, 'detail.html',d)
+
+
 def questions(request):
     Question=QuestionModel.objects.all()
     return render(request,'questionmodel_list.html',{'question':Question})
@@ -22,8 +40,11 @@ def questions(request):
 
 
 def question(request):
-    question=QuestionModel.objects.all()
-    return render(request,'questionmodel_list.html',{'question':question})
+    if 'id' in request.session:
+        question=QuestionModel.objects.all()
+        return render(request,'questionmodel_list.html',{'question':question})
+    else:
+        return redirect ('user:login')
 
 
 def addquestion(request):
@@ -73,6 +94,11 @@ def vote_question(request, id):
     questions.question_votes=vote
     questions.save()
     return redirect('qna:read')
+
+def comment(request, id):
+    questions = QuestionModel.objects.get(id=id)
+
+
 
 def answer(request, id):
     if request.method=="POST":

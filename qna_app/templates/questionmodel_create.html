@@ -7,7 +7,7 @@ Question description: <input type="text" name="question_desc"><br>
 Question image: <input type="file" name="question_image"><br>
 <br>
 <select name="category">
-    {%for cat in category%}
+    {% for cat in category %}
     <option value="{{cat.id}}">{{cat.title}}</option>
     {%endfor%}
 

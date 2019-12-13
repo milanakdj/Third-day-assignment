@@ -15,10 +15,19 @@ class QuestionModel(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     question_desc = models.TextField()
     question_votes=models.IntegerField(default=0)
+    
     question_img=models.ImageField(upload_to='QuestionImg',blank=True,null=True)
     category = models.ForeignKey(CategoryModel,on_delete=models.CASCADE)
     def __str__(self):
         return(self.title)
+
+class Comment(models.Model):
+    post = models.ForeignKey(QuestionModel,on_delete=models.CASCADE)
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+
+    def __str__(self):
+        return(self.text)
 
 
 class AnswerModel(models.Model):
